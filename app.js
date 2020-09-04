@@ -23,6 +23,8 @@ mongoose.connect("mongodb://localhost:27017/db_mahasiswa", {
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+// mengambil fungsi yang route mahasiswa
+const mahasiswaRouter = require("./routes/mahasiswa");
 
 var app = express();
 
@@ -38,6 +40,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+// menggunakan routes mahasiswa
+app.use("/mahasiswa", mahasiswaRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

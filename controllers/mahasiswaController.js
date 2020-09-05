@@ -31,22 +31,23 @@ module.exports = {
   },
 
   // Membuat create data untuk mahasiswa
-  /* Membuat fungsi untuk menambahkan data di form
- dan menggunakan async await */
+  // Membuat fungsi untuk menambahkan data di form dan menggunakan async await
   addMahasiswa: async (req, res) => {
     // memberi validasi untuk inputan yang kosong
     try {
+      // Membuat contanta untuk nama, nim, jurusan, dan alamat yang diambil dari body/yang diketikan di form
       const { nama, nim, jurusan, alamat } = req.body;
+      // lalu mengembalikan fungsi dan membuat data dari scheme/model Mahasiswa
       await Mahasiswa.create({ nama, nim, jurusan, alamat });
-      // ketika create data memberikan notifikasi
+      // ketika create data berhasil memberikan notifikasi
       req.flash("alertMessage", "Success add data Mahasiswa");
       req.flash("alertStatus", "success");
-      res.redirect("/mahasiswa"); // Setelah berhasil ngecreate data akan meredirect ke tjuan yang sudah ditentukan
+      res.redirect("/mahasiswa"); // Setelah berhasil membuat data akan meredirect ke tujuan yang sudah ditentukan
     } catch (error) {
       // ketika create data error memberikan notifikasi
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
-      // ketika inputa kosong redirect kehalaman
+      // ketika inputan kosong, maka redirect kehalaman
       res.redirect("/mahasiswa");
     }
   },

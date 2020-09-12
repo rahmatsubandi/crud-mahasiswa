@@ -27,7 +27,34 @@
     </div>
     <!-- Add Modal -->
     <%- include('add_modal.ejs') %>
+    <!-- Add Modal -->
+    <%- include('edit_modal.ejs') %>
     <!-- JS -->
     <%- include('js.ejs') %>
+
+    <script>
+      /* Menampilkan modal dan memanggil tag table yang memiliki id dataTable
+         class button-update di class tag a Edit di file table.ejs */
+      $("#dataTable").on("click", ".button-update", function () {
+        // membuat variabel untuk mengambil data-id, data-name, dstnya yang sudah dibuat di file table.ejs di bagian tag a edit
+        let id = $(this).data("id");
+        let nama = $(this).data("nama");
+        let nim = $(this).data("nim");
+        let jurusan = $(this).data("jurusan");
+        let alamat = $(this).data("alamat");
+        /*
+         * memanggil id edit-modal yang ada di file edit_modal.ejs
+         * dan membuat fungsi dari method
+         */
+        $("#edit-modal").modal("show");
+        /* Lalu Mengirim  id, name, dstnya melalu class disamping form-control tag input
+           dan valuenya mengambil dari setiap let yang dideklarasikan di atas */
+        $(".id").val(id);
+        $(".nama").val(nama);
+        $(".nim").val(nim);
+        $(".jurusan").val(jurusan);
+        $(".alamat").val(alamat);
+      });
+    </script>
   </body>
 </html>

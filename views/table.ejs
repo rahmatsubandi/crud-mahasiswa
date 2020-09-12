@@ -30,14 +30,22 @@
           </tr>
         </thead>
         <tbody>
+          <% for(let i = 0; i < mahasiswa.length; i++){ %>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= i +1 %></td>
+            <td><%= mahasiswa[i].nama %></td>
+            <td><%= mahasiswa[i].nim %></td>
+            <td><%= mahasiswa[i].jurusan %></td>
+            <td><%= mahasiswa[i].alamat %></td>
             <td class="text-center">
-              <a href="#" class="btn btn-outline-warning btn-sm button-update"
+              <a
+                href="javascript:void()"
+                class="btn btn-outline-warning btn-sm button-update"
+                data-id="<%= mahasiswa[i].id %>"
+                data-nama="<%= mahasiswa[i].nama %>"
+                data-nim="<%= mahasiswa[i].nim %>"
+                data-jurusan="<%= mahasiswa[i].jurusan %>"
+                data-alamat="<%= mahasiswa[i].alamat %>"
                 >Edit</a
               >
               <button type="submit" class="btn btn-outline-danger btn-sm">
@@ -45,6 +53,7 @@
               </button>
             </td>
           </tr>
+          <% } %>
         </tbody>
       </table>
     </div>

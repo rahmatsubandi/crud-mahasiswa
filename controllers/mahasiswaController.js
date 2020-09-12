@@ -52,11 +52,35 @@ module.exports = {
     }
   },
 
-  // Membuat read data untuk mahasiswa
-  // types code in here..
-
   // Membuat update data untuk mahasiswa
-  // types code in here..
+  editMahasiswa: async (req, res) => {
+    try {
+      // Membuat variabel yang menerima id, dan nama yang didapat dari req body atau yang di inputkan di form input
+      const { id, nama, nim, jurusan, alamat } = req.body;
+      /*  mencari variabel yang dideklarasikan diatas dan mengecek _id yang ada di req body yang dikirim
+   _id didapat database dan id isinya dari inputan user */
+      const mahasiswa = await Mahasiswa.findOne({ _id: id });
+      /* mahasiswa diambil dari fungsi diatas dan titik(.) nama diambil dari database = nama yang didapat dari req body
+   yang tentu dikirimkan dari inputan user */
+      mahasiswa.nama = nama;
+      mahasiswa.nim = nim;
+      mahasiswa.jurusan = jurusan;
+      mahasiswa.alamat = alamat;
+      // Menyimpan datanya ke database
+      await mahasiswa.save();
+      // ketika edit data berhasill memberikan notifikasi/alert
+      req.flash("alertMessage", "Success edit data mahasiswa");
+      req.flash("alertStatus", "success");
+      // Setelah berhasil maka meredirect ke tujuan yang ditentukan (/mahasiswa)
+      res.redirect("/mahasiswa");
+    } catch (error) {
+      // ketika edit data error memberikan notifikasi erronya
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      // ketika inputan kosong maka redirect kehalaman (/mahasiswa)
+      res.redirect("/mahasiswa");
+    }
+  },
 
   // Membuat delete data untuk mahasiswa
   // types code in here..

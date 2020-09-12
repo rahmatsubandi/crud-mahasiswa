@@ -9,6 +9,8 @@ const flash = require("connect-flash");
 const session = require("express-session");
 // mengimport mongoose
 const mongoose = require("mongoose");
+// import method override
+const methodOverride = require("method-override");
 /**
  * mengubungkan ke database
  * mongoose.connect sebuah metode yang berfungsi untuk mengubungkan ke MongoDB
@@ -35,6 +37,8 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+// menggunakan method-override
+app.use(methodOverride("_method"));
 // menggunakan session
 app.use(
   session({

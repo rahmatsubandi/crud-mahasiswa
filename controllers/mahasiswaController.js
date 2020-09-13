@@ -83,5 +83,28 @@ module.exports = {
   },
 
   // Membuat delete data untuk mahasiswa
-  // types code in here..
+  deleteMahasiswa: async (req, res) => {
+    try {
+      /*
+  Membuat variabel yang menerima id yang didapat dari params
+  id didapat database dan id isinya dari params
+  */
+      const { id } = req.params;
+      // cek data Mahasiswa yang mau di delete berdasarkan id
+      const mahasiswa = await Mahasiswa.findOne({ _id: id });
+      // setelah datanya sudah didapat maka menghapusnya
+      await mahasiswa.remove();
+      // ketika delete data memberikan notifikasi
+      req.flash("alertMessage", "Success delete data mahasiswa");
+      req.flash("alertStatus", "warning");
+      // setelah berhasil remove maka melakukan redirect
+      res.redirect("/mahasiswa");
+    } catch (error) {
+      // ketika create data error memberikan notifikasi
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      // ketika inputa kosong redirect kehalaman
+      res.redirect("/mahasiswa");
+    }
+  },
 };

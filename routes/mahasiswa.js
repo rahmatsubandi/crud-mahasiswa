@@ -7,7 +7,8 @@ const mahasiswaController = require("../controllers/mahasiswaController");
 // endpoint mahasiswa
 router.get("/", mahasiswaController.viewMahasiswa); // Untuk view
 router.post("/", mahasiswaController.addMahasiswa); // Untuk menambahkan data mahasiswa
-router.put("/", mahasiswaController.editMahasiswa); // Untuk edit data Mahasiswa
+router.put("/", mahasiswaController.editMahasiswa); // Untuk edit data mahasiswa
+router.delete("/:id", mahasiswaController.deleteMahasiswa); // Untuk hapus data mahasiswa berdasarkan id
 
 // Lalu export routernya
 module.exports = router;
